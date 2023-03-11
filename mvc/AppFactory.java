@@ -4,22 +4,23 @@ package mvc;
 
 3/10/2023 - Niko Jokhadze: Created file
 
-3/11/2023 - Owen Semersky: Changed file from a class to interface, added interface methods.
+3/11/2023 - Owen Semersky: Changed file from a class to an interface.
+                           Added interface methods.
 
  */
 
 public interface AppFactory {
-    public Model makeModel();
+    Model makeModel();
 
-    public View makeView();
+    View makeView();
 
-    public String getTitle();
+    String getTitle();
 
-    public String getHelp();
+    String getHelp();
 
-    public String about();
+    String about();
 
-    public String getEditCommands();
+    String getEditCommands();
 
-    public Command makeEditCommand(String name);
+    Command makeEditCommand(String name);
 }
