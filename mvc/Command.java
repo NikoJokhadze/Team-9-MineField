@@ -4,7 +4,7 @@ package mvc;
 
 3/10/2023 - Niko Jokhadze: Created file
 3/12/2023 - Hazuki Sugahara: edited file
-3/14/2023 - Hazuki Sugahara
+3/14/2023 - Hazuki Sugahara: edited file
 
  */
 
@@ -16,7 +16,5 @@ public abstract class Command {
         this.model = model;
     }
   
-    abstract void execute()
-
-    abstract void undo()
+    abstract void execute();
 }
