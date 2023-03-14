@@ -7,44 +7,15 @@ package mvc;
 
  */
 
-public class Command {
+public abstract class Command {
     
     private Model model;
-    private CommandProcessor processor = CommandProcessor.getInstance();
 
     public Command(Model model){
         this.model = model;
     }
   
-    public void execute(){
-        processor.execute(this);
-    }
+    abstract void execute()
 
-    public void undo(){
-        processor.undo(this);
-    }
-}
-
-class CommandProcessor {
-  
-    private static CommandProcessor single_instance = null;
-  
-    private CommandProcessor(){
-    }
-  
-    public static synchronized CommandProcessor getInstance(){
-        if(single_instance == null)
-        {
-            single_instance = new CommandProcessor();
-        }
-        return single_instance;
-    }
-
-    public void execute(Command command){
-
-    }
-
-    public void undo(Command command){
-
-    }
+    abstract void undo()
 }
