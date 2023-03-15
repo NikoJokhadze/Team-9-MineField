@@ -10,6 +10,7 @@ import java.beans.PropertyChangeListener;
 /* Class "View" Datalog
 3/10/2023 - Niko Jokhadze: Created file
 3/11/2023 - Hazuki Sugahara: edit file
+3/14/2023 - Hazuki Sugahara: modified file
  */
 public class View extends JPanel implements PropertyChangeListener {
     Model model;
@@ -28,8 +29,8 @@ public class View extends JPanel implements PropertyChangeListener {
         String event = evt.getPropertyName();
 
         if("New".equals(event) || "Open".equals(event)){
-            Model oldModel = (Model)evt.getOldValue();
-            Model newModel = (Model) evt.getNewValue();
+            this.model = (Model)evt.getNewValue();
+            model.initSupport();
         }
     }
 }
