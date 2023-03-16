@@ -4,7 +4,7 @@ import mvc.*;
 
 /* Class "MineField" Datalog
 
-3/10/2023 - Niko Jokhadze: Created file
+3/16/2023 - Niko Jokhadze: Created file
 
  */
 
