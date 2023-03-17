@@ -41,4 +41,6 @@ public class MineFieldView extends View{
           cells[row][col].setBorder(BorderFactory.createLineBorder(Color.green));
         }
         this.add(cells[row][col]);
+      }
+    }
 }
