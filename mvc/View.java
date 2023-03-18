@@ -23,6 +23,10 @@ public class View extends JPanel implements PropertyChangeListener {
         setBackground(Color.WHITE);
     }
 
+    public void setModel(Model model){
+        this.model = model;
+    }
+    
     @Override
     public void propertyChange(PropertyChangeEvent evt){
 
