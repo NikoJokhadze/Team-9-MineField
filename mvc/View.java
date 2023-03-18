@@ -35,6 +35,7 @@ public class View extends JPanel implements PropertyChangeListener {
         if("New".equals(event) || "Open".equals(event)){
             this.model = (Model)evt.getNewValue();
             model.initSupport();
+            repaint();
         }
     }
 }
