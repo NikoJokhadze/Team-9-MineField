@@ -178,11 +178,11 @@ public class AppPanel extends JPanel implements PropertyChangeListener, ActionLi
             Utilities.error(ex); // all error handling done here!
         }
 
-        try{
-            cmmdObject.execute();
-        } catch (Exception ex){
-            Utilities.error(ex);
-        }
+//        try{
+//            cmmdObject.execute();
+//        } catch (Exception ex){
+//            Utilities.error(ex);
+//        }
     }
 
     class ControlPanel extends JPanel {
