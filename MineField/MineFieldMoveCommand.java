@@ -17,7 +17,7 @@ public class MineFieldMoveCommand extends Command{
   }
   
   public void execute() {
-    MineField mineField= (MineField)model;
-    //some method to change the minefield
+    MineField mine= (MineField)model;
+    m.move();
   }
 }
