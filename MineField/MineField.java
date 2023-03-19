@@ -79,7 +79,7 @@ public class MineField extends Model {
         // dimensions will be a square, so height = width, simply return height.
     }
 
-    publpublic void move(Heading heading) throws Exception {
+    public void move(Heading heading) throws Exception {
         int x = getLocationX();
         int y = getLocationY();
         switch (heading) {
