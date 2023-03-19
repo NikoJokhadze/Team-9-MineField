@@ -13,7 +13,7 @@ import java.beans.PropertyChangeListener;
 3/14/2023 - Hazuki Sugahara: modified file
  */
 public class View extends JPanel implements PropertyChangeListener {
-    Model model;
+    public Model model;
 
     public View(Model model){
         this.model = model;
