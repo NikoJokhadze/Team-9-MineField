@@ -23,39 +23,51 @@ public class MineFieldPanel extends AppPanel {
         super(factory);
         MineField m = (MineField) model;
         m.addPropertyChangeListener(this);
-        controls.setLayout(new GridLayout(4, 2));
+        setLayout(new GridLayout(4, 2));
+        JPanel p = new JPanel();
+        Dimension buttonSize = new Dimension(50, 25);
         
         northWest = new JButton("NW");
         northWest.addActionListener(this);
-        addControl(northWest);
+        p.add(northWest);
+        add(p);
 
         north = new JButton("N");
         north.addActionListener(this);
-        addControl(north);
+        p.add(north);
+        add(p);
 
         northEast = new JButton("NW");
         northEast.addActionListener(this);
-        addControl(northEast);
+        p.add(northEast);
+        add(p);
 
         west = new JButton("W");
         west.addActionListener(this);
-        addControl(west);
+        p.add(west);
+        add(p);
 
         east = new JButton("E");
         east.addActionListener(this);
-        addControl(east);
+        p.add(east);
+        add(p);
 
         southWest = new JButton("SW");
         southWest.addActionListener(this);
-        addControl(southWest);
+        p.add(southWest);
+        add(p);
 
         south = new JButton("S");
         south.addActionListener(this);
-        addControl(south);
+        p.add(south);
+        add(p);
 
         southEast = new JButton("SE");
         southEast.addActionListener(this);
-        addControl(southEast);
+        p.add(southEast);
+        add(p);
+
+        addControl(p);
     }
 
     public static void main(String[] args) {
