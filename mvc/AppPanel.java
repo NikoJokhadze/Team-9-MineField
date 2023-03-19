@@ -1,7 +1,8 @@
 package mvc;
 
-import javax.swing.*;
 import java.awt.*;
+import java.beans.*;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileInputStream;
@@ -14,71 +15,117 @@ import java.io.ObjectOutputStream;
 3/10/2023 - Niko Jokhadze: Created file
                            Added class "ControlPanel"
 3/12/2023 - Niko Jokhadze: Adjusted details as needed
+3/18/2023 - Niko Jokhadze: Revamped code, different implementations
 
  */
 
-public class AppPanel extends JPanel implements ActionListener {
-    private Model model;
-    private ControlPanel controls;
-    private View view;
+public class AppPanel extends JPanel implements PropertyChangeListener, ActionListener {
 
-    public AppPanel() {
-        // create model, install controls & view
-        model = new Model();
-        view = new View(model);
+    protected Model model;
+    protected AppFactory factory;
+    protected View views;
+    protected ControlPanel controls;
+    private SafeFrame frame;
+    public static int FRAME_WIDTH = 500;
+    public static int FRAME_HEIGHT = 300;
+
+    public AppPanel(AppFactory factory) {
+        super();
+        this.factory = factory;
+        model = factory.makeModel();
+        views = factory.makeView(model);
+        if (model != null) model.addPropertyChangeListener(this);
+        views.setBackground(Color.LIGHT_GRAY);
+
         controls = new ControlPanel();
         this.setLayout((new GridLayout(1, 2)));
         this.add(controls);
-        this.add(view);
-        // create my frame with menus and display it
-        SafeFrame frame = new SafeFrame();
+        this.add(views);
+
+        frame = new SafeFrame();
         Container cp = frame.getContentPane();
+        frame.setJMenuBar(createMenuBar());
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle(factory.getTitle());
+        frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         cp.add(this);
-        frame.setJMenuBar(this.createMenuBar());
-        frame.setTitle("Turtle Graphics");
-        frame.setSize(500, 300);
-        frame.setVisible(true);
-
-
-        /*
-        if we incorporate the subscribe and unsubscribe methods, we add something like this:
-        view.setModel(model);
-         */
     }
+
+    public void addControl(JComponent c){
+        controls.add(c);
+    }
+/*
+    public void addView(View view) {
+        views.add(view);
+    }
+
+
+    @Override
+    public Component add(Component c) {
+        if (c instanceof View) addView((View) c);
+        return super.add(c);
+    }
+
+ */
+
+    public void display() {
+        frame.setVisible(true);
+    }
+
+    //
+    public void propertyChange(PropertyChangeEvent evt) {
+        repaint();
+    }
+
+    public Model getModel() {
+        return model;
+    }
+
+
+    // called by file/open and file/new
+    public void setModel(Model newModel) {
+        this.model.removePropertyChangeListener(this);
+        this.model = newModel;
+        this.model.initSupport();
+        this.model.addPropertyChangeListener(this);
+        //for(View view: views) view.setModel(this.model);
+        //alternatively: this.model.copy(model);
+    }
+
 
     protected JMenuBar createMenuBar() {
         JMenuBar result = new JMenuBar();
-        JMenu fileMenu = Utilities.makeMenu("File", new String[]{"New", "Save", "Open", "Quit"}, this);
+        // add file, edit, and help menus
+        JMenu fileMenu =
+                Utilities.makeMenu("File", new String[]{"New", "Save", "Save As", "Open", "Quit"}, this);
         result.add(fileMenu);
-        JMenu editMenu = Utilities.makeMenu("Edit", new String[]{"North", "Northeast", "East", "Southeast", "South", "Southwest", "West", "Northwest"}, this);
+
+        JMenu editMenu =
+                Utilities.makeMenu("Edit", factory.getEditCommands(), this);
         result.add(editMenu);
-        JMenu helpMenu = Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
+
+        JMenu helpMenu =
+                Utilities.makeMenu("Help", new String[]{"About", "Help"}, this);
         result.add(helpMenu);
+
         return result;
     }
 
     public void actionPerformed(ActionEvent e) {
         String cmmd = e.getActionCommand();
+        Command cmmdObject = factory.makeEditCommand(model, cmmd, null);
         try {
             switch (cmmd) {
-                case "North": {}
-
-                case "Northeast": {}
-
-                case "East": {}
-
-                case "Southeast": {}
-
-                case "South": {}
-
-                case "Southwest": {}
-
-                case "West": {}
-
-                case "Northwest": {}
-
 
                 case "Save": {
+                    String fName = Utilities.getFileName((String) null, true);
+                    ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
+                    os.writeObject(this.model);
+                    os.close();
+                    break;
+                }
+
+                case "Save As": {
                     String fName = Utilities.getFileName((String) null, false);
                     ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(fName));
                     os.writeObject(this.model);
@@ -101,7 +148,7 @@ public class AppPanel extends JPanel implements ActionListener {
                 case "New": {
                     if (Utilities.confirm("Are you sure? Unsaved changes will be lost!")) {
                         model = new Model();
-                        //view.setModel(model);
+                        views.setModel(model);
                     }
                     break;
                 }
@@ -113,97 +160,38 @@ public class AppPanel extends JPanel implements ActionListener {
                 }
 
                 case "About": {
-                    Utilities.inform("Hazuki Sugahara, Owen Semersky, Niko Jokhadze" +
-                                     "\n2023. All rights reserved.");
+                    Utilities.inform(factory.about());
                     break;
                 }
 
                 case "Help": {
-                    String[] cmmds = new String[]{
-                            "North: Moves you one block up",
-                            "Northeast: Moves you to the upper right block",
-                            "East: Moves you one block right",
-                            "Southeast: Moves you to the lower right block",
-                            "South: Moves you one block down",
-                            "Southwest: Moves you to the lower left block",
-                            "West: Moves you one block left",
-                            "Northeast: Moves you to the upper left block",
-                    };
+                    String[] cmmds = factory.getHelp();
                     Utilities.inform(cmmds);
                     break;
                 }
 
                 default: {
-                    throw new Exception("Unrecognized command: " + cmmd);
+                    factory.makeEditCommand(model, cmmd, this).execute();
                 }
             }
-
         } catch (Exception ex) {
             Utilities.error(ex); // all error handling done here!
         }
-    }
 
+        try{
+            cmmdObject.execute();
+        } catch (Exception ex){
+            Utilities.error(ex);
+        }
+    }
 
     class ControlPanel extends JPanel {
         public ControlPanel() {
+            setBackground(Color.LIGHT_GRAY);
             setLayout(new GridLayout(4, 2));
             JPanel p = new JPanel();
             Dimension buttonSize = new Dimension(50, 25);
 
-            JButton north = new JButton("N");
-            JButton northeast = new JButton("NE");
-            JButton east = new JButton("E");
-            JButton southeast = new JButton("SE");
-            JButton south = new JButton("S");
-            JButton southwest = new JButton("SW");
-            JButton west = new JButton("W");
-            JButton northwest = new JButton("NW");
-
-            north.setPreferredSize(buttonSize);
-            northeast.setPreferredSize(buttonSize);
-            east.setPreferredSize(buttonSize);
-            southeast.setPreferredSize(buttonSize);
-            south.setPreferredSize(buttonSize);
-            southwest.setPreferredSize(buttonSize);
-            west.setPreferredSize(buttonSize);
-            northwest.setPreferredSize(buttonSize);
-
-            north.addActionListener(AppPanel.this);
-            p.add(north);
-            add(p);
-
-            northeast.addActionListener(AppPanel.this);
-            p.add(northeast);
-            add(p);
-
-            east.addActionListener(AppPanel.this);
-            p.add(east);
-            add(p);
-
-            southeast.addActionListener(AppPanel.this);
-            p.add(southeast);
-            add(p);
-
-            south.addActionListener(AppPanel.this);
-            p.add(south);
-            add(p);
-
-            southwest.addActionListener(AppPanel.this);
-            p.add(southwest);
-            add(p);
-
-            west.addActionListener(AppPanel.this);
-            p.add(west);
-            add(p);
-
-            northwest.addActionListener(AppPanel.this);
-            p.add(northwest);
-            add(p);
         }
-    }
-
-    // and away we go ...
-    public static void main(String[] args) {
-        AppPanel app = new AppPanel();
     }
 }
