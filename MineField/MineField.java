@@ -11,6 +11,7 @@ import java.util.Random;
 3/19/2023 - Niko Jokhadze: Implemented all functions
 3/19/2023 - Owen Semersky: Added getters for patches, dimensions, and surrounding mines.
                            These are used in the hint for MineFieldView.
+3/19/2023 - Hazuki Sugahara: modified the swtich statment
  */
 
 public class MineField extends Model {
@@ -78,18 +79,38 @@ public class MineField extends Model {
         // dimensions will be a square, so height = width, simply return height.
     }
 
-    public void move(Heading heading) throws Exception {
+    publpublic void move(Heading heading) throws Exception {
         int x = getLocationX();
         int y = getLocationY();
         switch (heading) {
-            case NORTH : { y++; };
-            case NORTHEAST : { x++; y++; };
-            case EAST : { x++; };
-            case SOUTHEAST : { x++; y--; };
-            case SOUTH : { y--; };
-            case SOUTHWEST : { x--; y--; };
-            case WEST : { x--; };
-            case NORTHWEST : { x--; y++; };
+            case NORTH :
+                x--;
+                break;
+            case NORTHEAST :
+                x--;
+                y++;
+                break;
+            case EAST :
+                y++;
+                break;
+            case SOUTHEAST :
+                x++;
+                y++;
+                break;
+            case SOUTH :
+                x++;
+                break;
+            case SOUTHWEST :
+                x++;
+                y--;
+                break;
+            case WEST :
+                y--;
+                break;
+            case NORTHWEST :
+                x--;
+                y++;
+                break;
         }
 
         if (x < 0 || x >= width || y < 0 || y >= height){
