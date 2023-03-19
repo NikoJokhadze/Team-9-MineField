@@ -8,7 +8,7 @@ import mvc.*;
 
  */
 
-public class MineFieldMoveCommand extend Command{
+public class MineFieldMoveCommand extends Command{
   Heading heading;
   
   public MineFieldMoveCommand(Model model) {
