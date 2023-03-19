@@ -16,6 +16,7 @@ import java.io.ObjectOutputStream;
                            Added class "ControlPanel"
 3/12/2023 - Niko Jokhadze: Adjusted details as needed
 3/18/2023 - Niko Jokhadze: Revamped code, different implementations
+3/19/2023 - Hazuki Sugahara: make some statement as comment
 
  */
 
