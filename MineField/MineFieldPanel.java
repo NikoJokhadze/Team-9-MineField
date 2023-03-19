@@ -17,4 +17,6 @@ public class MineFieldPanel extends AppPanel {
   private JButton south;
   private JButton southEast;
   
+  public MineFieldPanel(AppFactory factory)
+  
 }
