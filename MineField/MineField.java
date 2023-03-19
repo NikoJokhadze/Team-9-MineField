@@ -11,7 +11,8 @@ import java.util.Random;
 3/19/2023 - Niko Jokhadze: Implemented all functions
 3/19/2023 - Owen Semersky: Added getters for patches, dimensions, and surrounding mines.
                            These are used in the hint for MineFieldView.
-3/19/2023 - Hazuki Sugahara: modified the swtich statment
+3/19/2023 - Hazuki Sugahara: modified the swtich statement
+3/19/2023 - Owen Semersky: Edited switch statement, added implementation for getSurroundingMines.
  */
 
 public class MineField extends Model {
@@ -43,7 +44,7 @@ public class MineField extends Model {
         path = new ArrayList<Point>();
         path.add(location);
         patches[width - 1][height - 1].goal = true; //sets the very end of the grid as the goal patch
-        patches[width - 1][height - 1].mine = false; //guarentees that the goal patch won't be mined
+        patches[width - 1][height - 1].mine = false; //guarantees that the goal patch won't be mined
     }
 
     public Patch[][] getPatches() {
@@ -84,38 +85,38 @@ public class MineField extends Model {
         int y = getLocationY();
         switch (heading) {
             case NORTH :
-                x--;
+                y--;
                 break;
             case NORTHEAST :
-                x--;
-                y++;
+                x++;
+                y--;
                 break;
             case EAST :
-                y++;
+                x++;
                 break;
             case SOUTHEAST :
                 x++;
                 y++;
                 break;
             case SOUTH :
-                x++;
+                y++;
                 break;
             case SOUTHWEST :
-                x++;
-                y--;
+                x--;
+                y++;
                 break;
             case WEST :
-                y--;
+                x--;
                 break;
             case NORTHWEST :
                 x--;
-                y++;
+                y--;
                 break;
         }
 
         if (x < 0 || x >= width || y < 0 || y >= height){
             throw new Exception("You have reached the edge of the field.");
-            // this is the bounds check, as the user will not be allwoed to leave the field
+            // this is the bounds check, as the user will not be allowed to leave the field
         }
 
         if (patches[x][y].mine){
@@ -136,6 +137,54 @@ public class MineField extends Model {
         public boolean goal = false; // since we start away from the finish line, it will be false.
         // there will be only one goal patch at the bottom right
         public int getSurroundingMines() {
+            // Current location.
+            int x = getLocationX();
+            int y = getLocationY();
+
+            // Minefield patches.
+            Patch[][] patches = getPatches();
+
+            // Check North
+            if ((y - 1 > 0) && (patches[x][y - 1].mine)) {
+                surroundingMines++;
+            }
+
+            // Check Northeast
+            if ((x + 1 < 20) && (y - 1 >= 0) && (patches[x + 1][y - 1].mine)) {
+                surroundingMines++;
+            }
+
+            // Check East
+            if ((x + 1 < 20) && (patches[x + 1][y].mine)) {
+                surroundingMines++;
+            }
+
+            // Check Southeast
+            if ((x + 1 < 20) && (y + 1 < 20) && (patches[x + 1][y + 1].mine)) {
+                surroundingMines++;
+            }
+
+            // Check South
+            if ((y + 1 < 20) && (patches[x][y + 1].mine)) {
+                surroundingMines++;
+            }
+
+            // Check Southwest
+            if ((x - 1 >= 0) && (y + 1 < 20) && (patches[x - 1][y + 1].mine)) {
+                surroundingMines++;
+            }
+
+            // Check West
+            if ((x - 1 >= 0) && (patches[x - 1][y].mine)) {
+                surroundingMines++;
+            }
+
+            // Check Northwest
+            if ((x - 1 >= 0) && (y - 1 >= 0) && (patches[x - 1][y - 1].mine)) {
+                surroundingMines++;
+            }
+
+            // Return number of mines found around this location.
             return surroundingMines;
         }
 
