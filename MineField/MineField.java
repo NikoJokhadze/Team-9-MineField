@@ -12,7 +12,7 @@ import java.util.Random;
 3/19/2023 - Owen Semersky: Added getters for patches, dimensions, and surrounding mines.
                            These are used in the hint for MineFieldView.
 3/19/2023 - Hazuki Sugahara: modified switch statement 
-3/19/2023 - Owen Semersky: Edited switch statement, added implementation for getSurroundingMines.
+3/19/2023 - Owen Semersky: added implementation for getSurroundingMines.
  */
 
 public class MineField extends Model {
