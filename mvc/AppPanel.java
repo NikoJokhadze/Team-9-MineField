@@ -72,7 +72,7 @@ public class AppPanel extends JPanel implements PropertyChangeListener, ActionLi
         frame.setVisible(true);
     }
 
-    //
+    @Override
     public void propertyChange(PropertyChangeEvent evt) {
         repaint();
     }
