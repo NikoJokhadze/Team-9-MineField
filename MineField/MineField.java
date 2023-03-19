@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /* Class "MineField" Datalog
-
 3/16/2023 - Niko Jokhadze: Created file
 3/19/2023 - Niko Jokhadze: Implemented all functions
-
+3/19/2023 - Owen Semersky: Added getters for patches, dimensions, and surrounding mines.
+                           These are used in the hint for MineFieldView.
  */
 
 public class MineField extends Model {
     public static int minePercent = 5;
-    private int height = 20; //20 rows
-    private int width = 20; //20 columns
+    private int height = 20; // 20 rows
+    private int width = 20; // 20 columns
     private Patch[][] patches;
     private Point location;
     private final ArrayList<Point> path;
@@ -69,6 +69,15 @@ public class MineField extends Model {
         return path;
     }
 
+    public Patch getPatch(int row, int col) {
+        return patches[row][col];
+    }
+
+    public int getDim() {
+        return height;
+        // dimensions will be a square, so height = width, simply return height.
+    }
+
     public void move(Heading heading) throws Exception {
         int x = getLocationX();
         int y = getLocationY();
@@ -105,6 +114,9 @@ public class MineField extends Model {
         public boolean occupied = false; // this becomes true for one patch at a time, being the one that the player is on
         public boolean goal = false; // since we start away from the finish line, it will be false.
         // there will be only one goal patch at the bottom right
+        public int getSurroundingMines() {
+            return surroundingMines;
+        }
 
     }
 }
