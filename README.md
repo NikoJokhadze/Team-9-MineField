@@ -1,7 +1,7 @@
 # Team-9-MineField
 CS 151 (Object Oriented Design) Team 9's project of the assignment "MineField Customization of the MVC Framework"
 
-Project Description: Implementing our own version of a customizable MVC framework, and using that MVC to make a functional MineField game. The objective of the MineField game is to be able to go from the upper-left corner of a grid to the bottom-right corner, moving one square at a time in any of the 8 directions around you. Each square you step on tells you a number that indicates how many of the squares around you are rigged with a mine. The goal is to make it to the end without stepping on any mines.
+Project Description: Implementing our own version of a customizable MVC framework, and using that MVC to make a functional MineField game. The objective of the MineField game is to be able to go from the upper-left corner of a grid to the bottom-right corner, moving one square at a time in any of the 8 directions around you. A percentage of the squares on the board are mines. Each square you step on indicates how many of the squares around you are rigged with a mine. Using logic, you must reach the goal without stepping on a mine. Stepping on a mine will end the game. The goal is to make it to the end without stepping on any mines.
 
 Team 9 Group Members: Hazuki Sugahara, Owen Semersky,  Niko Jokhadze
 
@@ -25,7 +25,7 @@ SafeFrame and Utilities: Given classes that contain useful utility methods.
 
 MineField:
 
-MineField: The model for our MineField. MAKE EDITS
+MineField: The model for our MineField. Contains the patch class, which is our implementation of the individual "squares". Handles the movement of the player, changing the x and y coordinates depending on the selected heading. Also handles the randomizing of the mines.
 
 Heading: Contains the available headings or directions that the user can move inside of the MineField. Includes all eight compass directions.
 
@@ -35,8 +35,8 @@ MineFieldMoveCommand: The only command available for the MineField is moving one
 
 MineFieldPanel: The JPanel for the MineField. Contains the controls as buttons and the MineField itself. Contains the main method used to run the program.
 
-MineFieldShape: The shape used for the MineField (Already created in MineFieldView?). MAKE EDITS
+MineFieldShape: This class is meant to be the shape for the MineField, however, this is already handles in MineFieldView.
 
 MineFieldView: Contains the 2D array that serves as the MineField. The 2D array contains patches, which are the tiles that can either be safe or mined.
 
-Patch: A patch is a single tile or cell in the MineField. A patch has a boolean that determines whether it is a mine, which is chosen with RNG. The patch also contains a value that represents the number of mines that are one movement away from it (In a 3x3 square).
+Patch: A patch is a single tile or cell in the MineField. A patch has a boolean that determines whether it is a mine, which is chosen with RNG. The patch also contains a value that represents the number of mines that are one movement away from it (In a 3x3 square). It also has booleans that determine whether it is occupied or if it is the goal.
