@@ -21,6 +21,10 @@ public class MineFieldPanel extends AppPanel {
 
     public MineFieldPanel(AppFactory factory) {
         super(factory);
+        MineField m = (MineField) model;
+        m.addPropertyChangeListener(this);
+        controls.setLayout(new GridLayout(4, 2));
+        
         northWest = new JButton("NW");
         northWest.addActionListener(this);
         addControl(northWest);
