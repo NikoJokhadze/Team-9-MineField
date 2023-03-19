@@ -9,6 +9,7 @@ import java.beans.PropertyChangeEvent;
 
 3/16/2023 - Niko Jokhadze: Created file
 3/16/2023 - Hazuki Sugahara: edit file
+3/19/2023 - Hazuki Sugahara: added statement for the repaint method called
 
  */
 class Cell extends JLabel {
@@ -42,5 +43,14 @@ public class MineFieldView extends View{
         }
         this.add(cells[row][col]);
       }
+    }
+    
+    public void paintcomponent(Graphics gc) {
+      super.pantComponent(gc);
+      MineField m = (MineField)model;
+      int row = minefield.getLocationX();
+      int col = minefield.getLocationY();
+      cells[row][col].setText("" + cells[row][col].patch.getSurroundingMines());
+      cells[row][col].setBorder(BorderFactory.createLineBorder(Color.white));
     }
 }
