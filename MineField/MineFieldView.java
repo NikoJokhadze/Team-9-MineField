@@ -45,8 +45,8 @@ public class MineFieldView extends View{
       }
     }
     
-    public void paintcomponent(Graphics gc) {
-      super.pantComponent(gc);
+    public void paintComponent(Graphics gc) {
+      super.paintComponent(gc);
       MineField m = (MineField)model;
       int row = minefield.getLocationX();
       int col = minefield.getLocationY();
