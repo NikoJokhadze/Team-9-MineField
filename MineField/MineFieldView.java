@@ -13,7 +13,7 @@ import java.beans.PropertyChangeEvent;
 
  */
 class Cell extends JLabel {
-  Patch patch;
+  MineField.Patch patch;
 }
 
 public class MineFieldView extends View{
