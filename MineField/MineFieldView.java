@@ -43,9 +43,4 @@ public class MineFieldView extends View{
         this.add(cells[row][col]);
       }
     }
-    
-    public void propertyChange(PropertyChangeEvent evt) {
-      //still figuring out
-
-    }
 }
