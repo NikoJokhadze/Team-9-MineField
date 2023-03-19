@@ -7,7 +7,7 @@ package MineField;
 
  */
 
-public class MineFieldFactory {
+public class MineFieldFactory implements AppFactory {
   
   public Model makeModel() { return new MineField(); }
   
