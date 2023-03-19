@@ -11,12 +11,13 @@ import mvc.*;
 public class MineFieldMoveCommand extends Command{
   Heading heading;
   
-  public MineFieldMoveCommand(Model model) {
+  public MineFieldMoveCommand(Model model, Heading heading) {
     super(model);
+    this.heading = heading;
   }
   
   public void execute() {
     MineField mineField= (MineField)model;
-    
+    //some method to change the minefield
   }
 }
