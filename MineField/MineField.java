@@ -11,6 +11,7 @@ import java.util.Random;
 3/19/2023 - Niko Jokhadze: Implemented all functions
 3/19/2023 - Owen Semersky: Added getters for patches, dimensions, and surrounding mines.
                            These are used in the hint for MineFieldView.
+3/20/2023 - Hazuki Sugahara: modified switch statement                           
  */
 
 public class MineField extends Model {
