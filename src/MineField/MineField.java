@@ -14,7 +14,7 @@ import javax.swing.*;
                            These are used in the hint for MineFieldView.
 3/19/2023 - Hazuki Sugahara: modified switch statement.
 3/19/2023 - Owen Semersky: added implementation for getSurroundingMines.
-3/19/2023 - Owen Semersky: Changed getSurroundingMines to setSurroundingMines.
+3/19/2023 - Owen Semersky: Changed getSurroundingMines to findSurroundingMines.
                            Now sets the variable only once.
 3/19/2023 - Niko Jokhadze: Modified move to have app close once you step on a mine or reach the goal.
                            Added reset functionality
