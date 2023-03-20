@@ -5,12 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 
 /* Class "MineField" Datalog
-
 3/16/2023 - Niko Jokhadze: Created file
 3/18/2023 - Hazuki Sugahara: Edited file
 3/19/2023 - Owen Semersky: Edited file
 3/19/2023 - Hazuki Sugahara: add few statement to set the buttons
-
  */
 
 public class MineFieldPanel extends AppPanel {
@@ -27,7 +25,7 @@ public class MineFieldPanel extends AppPanel {
         super(factory);
         MineField m = (MineField) model;
         m.addPropertyChangeListener(this);
-        
+
         JPanel p = new JPanel();
         Dimension buttonSize = new Dimension(50, 25);
         p.setLayout(new GridLayout(4, 2));
@@ -37,6 +35,7 @@ public class MineFieldPanel extends AppPanel {
         northWest.setPreferredSize(buttonSize);
         p.add(northWest);
         add(p);
+
 
         north = new JButton("N");
         north.addActionListener(this);
@@ -50,11 +49,13 @@ public class MineFieldPanel extends AppPanel {
         p.add(northEast);
         add(p);
 
+
         west = new JButton("W");
         west.addActionListener(this);
         west.setPreferredSize(buttonSize);
         p.add(west);
         add(p);
+
 
         east = new JButton("E");
         east.addActionListener(this);
@@ -62,17 +63,20 @@ public class MineFieldPanel extends AppPanel {
         p.add(east);
         add(p);
 
+
         southWest = new JButton("SW");
         southWest.addActionListener(this);
         southWest.setPreferredSize(buttonSize);
         p.add(southWest);
         add(p);
 
+
         south = new JButton("S");
         south.addActionListener(this);
         south.setPreferredSize(buttonSize);
         p.add(south);
         add(p);
+
 
         southEast = new JButton("SE");
         southEast.addActionListener(this);
