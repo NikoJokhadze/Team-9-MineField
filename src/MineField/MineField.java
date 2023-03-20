@@ -11,7 +11,10 @@ import java.util.Random;
 3/19/2023 - Niko Jokhadze: Implemented all functions
 3/19/2023 - Owen Semersky: Added getters for patches, dimensions, and surrounding mines.
                            These are used in the hint for MineFieldView.
-3/19/2023 - Hazuki Sugahara: modified the swtich statment
+3/19/2023 - Hazuki Sugahara: modified switch statement
+3/19/2023 - Owen Semersky: added implementation for getSurroundingMines.
+3/19/2023 - Owen Semersky: Changed getSurroundingMines to setSurroundingMines.
+                           Now sets the variable only once.
  */
 
 public class MineField extends Model {
@@ -131,13 +134,65 @@ public class MineField extends Model {
 
     public class Patch {
         public boolean mine = false;//initial patch is not a mine, will be set randomly in Minefield class
-        public int surroundingMines = 0;
+        public int surroundingMines;
         public boolean occupied = false; // this becomes true for one patch at a time, being the one that the player is on
         public boolean goal = false; // since we start away from the finish line, it will be false.
         // there will be only one goal patch at the bottom right
-        public int getSurroundingMines() {
-            return surroundingMines;
+
+        public void findSurroundingMines() {
+            int mineCount = 0;
+            // Current location.
+            int x = getLocationX();
+            int y = getLocationY();
+
+            // Minefield patches.
+            Patch[][] patches = getPatches();
+
+            // Check North
+            if((x - 1 >= 0) && (patches[x - 1][y].mine)) {
+                mineCount++;
+            }
+
+            // Check Northeast
+            if ((y + 1 <= 20) && (x - 1 >= 0) && (patches[x - 1][y + 1].mine)) {
+                mineCount++;
+            }
+
+            // Check East
+            if ((y + 1 <= 20) && (patches[x][y + 1].mine)) {
+                mineCount++;
+            }
+
+            // Check Southeast
+            if ((x + 1 <= 20) && (y + 1 <= 20) && (patches[x + 1][y + 1].mine)) {
+                mineCount++;
+            }
+
+            // Check South
+            if ((x + 1 <= 20) && (patches[x + 1][y].mine)) {
+                mineCount++;
+            }
+
+            // Check Southwest
+            if ((y - 1 >= 0) && (x + 1 <= 20) && (patches[x + 1][y - 1].mine)) {
+                mineCount++;
+            }
+
+            // Check West
+            if ((y - 1 >= 0) && (patches[x][y - 1].mine)) {
+                mineCount++;
+            }
+
+            // Check Northwest
+            if ((x - 1 >= 0) && (y - 1 >= 0) && (patches[x - 1][y - 1].mine)) {
+                mineCount++;
+            }
+
+            // Return number of mines found around this location.
+            surroundingMines = mineCount;
         }
 
     }
+
+
 }
