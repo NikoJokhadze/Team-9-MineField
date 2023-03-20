@@ -1,5 +1,4 @@
 package MineField;
-
 import mvc.*;
 
 /* Class "MineField" Datalog
@@ -8,7 +7,7 @@ import mvc.*;
 3/19/2023 - Owen Semersky: Added try/catch for execute
  */
 
-public class MineFieldMoveCommand extends Command {
+public class MineFieldMoveCommand extends Command{
     Heading heading;
 
     public MineFieldMoveCommand(Model model, Heading heading) {
@@ -17,7 +16,7 @@ public class MineFieldMoveCommand extends Command {
     }
 
     public void execute() {
-        MineField m = (MineField) model;
+        MineField m = (MineField)model;
         try {
             m.move(heading);
         } catch (Exception e) {
