@@ -146,37 +146,37 @@ public class MineField extends Model {
             Patch[][] patches = getPatches();
 
             // Check North
-            if ((y - 1 > 0) && (patches[x][y - 1].mine)) {
+            if((x - 1 >= 0) && (patches[x - 1][y].mine)) {
                 surroundingMines++;
             }
 
             // Check Northeast
-            if ((x + 1 < 20) && (y - 1 >= 0) && (patches[x + 1][y - 1].mine)) {
+            if ((y + 1 <= 20) && (x - 1 >= 0) && (patches[x - 1][y + 1].mine)) {
                 surroundingMines++;
             }
 
             // Check East
-            if ((x + 1 < 20) && (patches[x + 1][y].mine)) {
+            if ((y + 1 <= 20) && (patches[x][y + 1].mine)) {
                 surroundingMines++;
             }
 
             // Check Southeast
-            if ((x + 1 < 20) && (y + 1 < 20) && (patches[x + 1][y + 1].mine)) {
+            if ((x + 1 <= 20) && (y + 1 <= 20) && (patches[x + 1][y + 1].mine)) {
                 surroundingMines++;
             }
 
             // Check South
-            if ((y + 1 < 20) && (patches[x][y + 1].mine)) {
+            if ((x + 1 <= 20) && (patches[x + 1][y].mine)) {
                 surroundingMines++;
             }
 
             // Check Southwest
-            if ((x - 1 >= 0) && (y + 1 < 20) && (patches[x - 1][y + 1].mine)) {
+            if ((y - 1 >= 0) && (x + 1 <= 20) && (patches[x + 1][y - 1].mine)) {
                 surroundingMines++;
             }
 
             // Check West
-            if ((x - 1 >= 0) && (patches[x - 1][y].mine)) {
+            if ((y - 1 >= 0) && (patches[x][y - 1].mine)) {
                 surroundingMines++;
             }
 
