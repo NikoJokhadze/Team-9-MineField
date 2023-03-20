@@ -5,16 +5,18 @@ import mvc.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
+import javax.swing.*;
 
 /* Class "MineField" Datalog
-3/16/2023 - Niko Jokhadze: Created file
-3/19/2023 - Niko Jokhadze: Implemented all functions
+3/16/2023 - Niko Jokhadze: Created file.
+3/19/2023 - Niko Jokhadze: Implemented all functions.
 3/19/2023 - Owen Semersky: Added getters for patches, dimensions, and surrounding mines.
                            These are used in the hint for MineFieldView.
-3/19/2023 - Hazuki Sugahara: modified switch statement
+3/19/2023 - Hazuki Sugahara: modified switch statement.
 3/19/2023 - Owen Semersky: added implementation for getSurroundingMines.
 3/19/2023 - Owen Semersky: Changed getSurroundingMines to setSurroundingMines.
                            Now sets the variable only once.
+3/19/2023 - Niko Jokhadze: Modified move to have app close once you step on a mine or reach the goal.
  */
 
 public class MineField extends Model {
@@ -118,15 +120,21 @@ public class MineField extends Model {
 
         if (x < 0 || x >= width || y < 0 || y >= height){
             throw new Exception("You have reached the edge of the field.");
-            // this is the bounds check, as the user will not be allwoed to leave the field
+            // this is the bounds check, as the user will not be allowed to leave the field
         }
 
         if (patches[x][y].mine){
-            throw new Exception("You have stepped on a mine.");
+            JFrame frame = new JFrame("");
+            JOptionPane.showMessageDialog(frame, "You have stepped on a mine!");
+            JOptionPane.showMessageDialog(frame, "Game Over");
+            System.exit(0);
         }
 
         if (patches[x][y].goal){
-            throw new Exception("You have reached the goal!");
+            JFrame frame = new JFrame("");
+            JOptionPane.showMessageDialog(frame, "You have reached the goal!");
+            JOptionPane.showMessageDialog(frame, "Thanks for playing!");
+            System.exit(0);
         }
 
         location = new Point(x, y);

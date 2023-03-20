@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6d53de25-8b79-4616-85ab-33ce4dc5ef18" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6d53de25-8b79-4616-85ab-33ce4dc5ef18" name="Changes" comment="Version 0 of the MineField package.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MineField/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MineField/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MineField/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MineField/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MineField/MineField.java" beforeDir="false" afterPath="$PROJECT_DIR$/MineField/MineField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MineField/Heading.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MineField/Heading.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MineField/MineField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MineField/MineField.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MineField/MineFieldFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MineField/MineFieldFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MineField/MineFieldMoveCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MineField/MineFieldMoveCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MineField/MineFieldPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MineField/MineFieldPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MineField/MineFieldShape.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MineField/MineFieldShape.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,21 +63,6 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="mvcApps" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="mvcApps" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
