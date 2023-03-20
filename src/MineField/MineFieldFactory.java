@@ -6,6 +6,7 @@ import mvc.*;
 3/16/2023 - Niko Jokhadze: Created file
 3/17/2023 - Hazuki Sugahara: Edited file
 3/19/2023 - Owen Semersky: Added import statement.
+3/19/2023 - Niko Jokhadze: Added reset button in dropdown
  */
 
 public class MineFieldFactory implements AppFactory {
@@ -16,7 +17,7 @@ public class MineFieldFactory implements AppFactory {
         return new MineFieldView((MineField)m);
     }
 
-    public String[] getEditCommands() { return new String[] {"NW", "N", "NE", "W", "E", "SW", "S", "SE"}; }
+    public String[] getEditCommands() { return new String[] {"NW", "N", "NE", "W", "E", "SW", "S", "SE", "Reset"}; }
 
     public Command makeEditCommand(Model model, String type, Object source) {
         if(type == "N")
@@ -35,6 +36,8 @@ public class MineFieldFactory implements AppFactory {
             return new MineFieldMoveCommand(model, Heading.SOUTH);
         else if (type == "SE")
             return new MineFieldMoveCommand(model, Heading.SOUTHEAST);
+        else if (type == "Reset")
+            return new MineFieldMoveCommand(model, Heading.RESET);
         return null;
     }
 
@@ -49,7 +52,8 @@ public class MineFieldFactory implements AppFactory {
                 "South: Moves you one block down",
                 "Southwest: Moves you to the lower left block",
                 "West: Moves you one block left",
-                "Northeast: Moves you to the upper left block"
+                "Northeast: Moves you to the upper left block",
+                "Reset: Brings you back to the starting point",
         };
     }
 

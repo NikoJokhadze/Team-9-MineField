@@ -17,6 +17,7 @@ import javax.swing.*;
 3/19/2023 - Owen Semersky: Changed getSurroundingMines to setSurroundingMines.
                            Now sets the variable only once.
 3/19/2023 - Niko Jokhadze: Modified move to have app close once you step on a mine or reach the goal.
+                           Added reset functionality
  */
 
 public class MineField extends Model {
@@ -115,6 +116,10 @@ public class MineField extends Model {
             case NORTHWEST :
                 x--;
                 y++;
+                break;
+            case RESET :
+                x = 0;
+                y = 0;
                 break;
         }
 
