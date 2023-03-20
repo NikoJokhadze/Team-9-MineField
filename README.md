@@ -35,7 +35,7 @@ MineFieldMoveCommand: The only command available for the MineField is moving one
 
 MineFieldPanel: The JPanel for the MineField. Contains the controls as buttons and the MineField itself. Contains the main method used to run the program.
 
-MineFieldShape: This class is meant to be the shape for the MineField, however, this is already handles in MineFieldView.
+MineFieldShape: This class is meant to be the shape for the MineField, however, this is already handled in MineFieldView. Therefore, the team did not use this class.
 
 MineFieldView: Contains the 2D array that serves as the MineField. The 2D array contains patches, which are the tiles that can either be safe or mined.
 
