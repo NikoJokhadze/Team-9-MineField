@@ -9,6 +9,7 @@ import java.awt.*;
 3/18/2023 - Hazuki Sugahara: Edited file
 3/19/2023 - Owen Semersky: Edited file
 3/19/2023 - Hazuki Sugahara: add few statement to set the buttons
+3/19/2023 - Niko Jokhadze: changed button layout to 3x3 grid
  */
 
 public class MineFieldPanel extends AppPanel {
@@ -27,8 +28,8 @@ public class MineFieldPanel extends AppPanel {
         m.addPropertyChangeListener(this);
 
         JPanel p = new JPanel();
-        Dimension buttonSize = new Dimension(50, 25);
-        p.setLayout(new GridLayout(4, 2));
+        Dimension buttonSize = new Dimension(25, 25);
+        p.setLayout(new GridLayout(3, 3, 5, 5));
 
         northWest = new JButton("NW");
         northWest.addActionListener(this);
@@ -56,6 +57,11 @@ public class MineFieldPanel extends AppPanel {
         p.add(west);
         add(p);
 
+        east = new JButton("");
+        east.addActionListener(this);
+        east.setPreferredSize(buttonSize);
+        p.add(east);
+        add(p);
 
         east = new JButton("E");
         east.addActionListener(this);
