@@ -1,6 +1,6 @@
 package MineField;
 
-/* Class "MineField" Datalog
+/* Class "Heading" Datalog
 
 3/16/2023 - Niko Jokhadze: Created file
                            Added enumeration directions

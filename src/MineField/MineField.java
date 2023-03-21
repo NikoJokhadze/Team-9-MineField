@@ -18,12 +18,17 @@ import javax.swing.*;
                            Now sets the variable only once.
 3/19/2023 - Niko Jokhadze: Modified move to have app close once you step on a mine or reach the goal.
                            Added reset functionality
+3/20/2023 - Niko Jokhadze: Added difficulty selector
+                           Fixed ArrayIndexOutOfBounds error when reaching the bottom or right bounds
  */
 
 public class MineField extends Model {
-    public static int minePercent = 5;
+    public int minePercent;
     private int height = 20; // 20 rows
     private int width = 20; // 20 columns
+    private int easyValue = 3;
+    private int normalValue = 5;
+    private int hardValue = 10;
     private Patch[][] patches;
     private Point location;
     private final ArrayList<Point> path;
@@ -31,6 +36,7 @@ public class MineField extends Model {
     public MineField() {
         patches = new Patch[width][height]; // makes an empty 20 x 20 2D array
         Random random = new Random();
+        difficultySelector();
 
         for (int i = 0; i < width; i++) {
             for(int j = 0; j < height; j++) {
@@ -44,12 +50,12 @@ public class MineField extends Model {
         }
         //designate player location
 
-
         location = new Point(0, 0); // starting point
         path = new ArrayList<Point>();
         path.add(location);
         patches[width - 1][height - 1].goal = true; //sets the very end of the grid as the goal patch
-        patches[width - 1][height - 1].mine = false; //guarentees that the goal patch won't be mined
+        patches[0][0].mine = false; //guarantees that the starting patch won't be mined
+        patches[width - 1][height - 1].mine = false; //guarantees that the goal patch won't be mined
     }
 
     public Patch[][] getPatches() {
@@ -83,6 +89,36 @@ public class MineField extends Model {
     public int getDim() {
         return height;
         // dimensions will be a square, so height = width, simply return height.
+    }
+
+    public int difficultySelector(){
+        JFrame frame = new JFrame("");
+        Object[] options = {"Easy", "Normal", "Hard"};
+        int option = JOptionPane.showOptionDialog(frame,
+                "Please select your difficulty:",
+                "Welcome to Minefield!",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[2]);
+
+        switch (option) {
+            case 0 :
+                minePercent = easyValue;
+                break;
+            case 1 :
+                minePercent = normalValue;
+                break;
+            case 2 :
+                minePercent = hardValue;
+                break;
+            default:
+                minePercent = 5;
+                break;
+        }
+
+        return minePercent;
     }
 
     public void move(Heading heading) throws Exception {
@@ -167,27 +203,27 @@ public class MineField extends Model {
             }
 
             // Check Northeast
-            if ((y + 1 <= 20) && (x - 1 >= 0) && (patches[x - 1][y + 1].mine)) {
+            if ((y + 1 <= width) && (x - 1 >= 0) && (patches[x - 1][y + 1].mine)) {
                 mineCount++;
             }
 
             // Check East
-            if ((y + 1 <= 20) && (patches[x][y + 1].mine)) {
+            if ((y + 1 <= width) && (patches[x][y + 1].mine)) {
                 mineCount++;
             }
 
             // Check Southeast
-            if ((x + 1 <= 20) && (y + 1 <= 20) && (patches[x + 1][y + 1].mine)) {
+            if ((x + 1 <= height) && (y + 1 <= width) && (patches[x + 1][y + 1].mine)) {
                 mineCount++;
             }
 
             // Check South
-            if ((x + 1 <= 20) && (patches[x + 1][y].mine)) {
+            if ((x + 1 <= height) && (patches[x + 1][y].mine)) {
                 mineCount++;
             }
 
             // Check Southwest
-            if ((y - 1 >= 0) && (x + 1 <= 20) && (patches[x + 1][y - 1].mine)) {
+            if ((y - 1 >= 0) && (x + 1 <= height) && (patches[x + 1][y - 1].mine)) {
                 mineCount++;
             }
 
@@ -204,8 +240,5 @@ public class MineField extends Model {
             // Return number of mines found around this location.
             surroundingMines = mineCount;
         }
-
     }
-
-
 }

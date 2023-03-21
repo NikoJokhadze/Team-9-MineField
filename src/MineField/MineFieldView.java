@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 
-/* Class "MineField" Datalog
+/* Class "MineFieldView" and "Cell" Datalog
 3/16/2023 - Niko Jokhadze: Created file
 3/16/2023 - Hazuki Sugahara: edit file
 3/19/2023 - Hazuki Sugahara: added statement for the repaint method called
