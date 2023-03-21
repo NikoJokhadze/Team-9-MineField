@@ -20,6 +20,7 @@ import javax.swing.*;
                            Added reset functionality
 3/20/2023 - Niko Jokhadze: Added difficulty selector
                            Fixed ArrayIndexOutOfBounds error when reaching the bottom or right bounds
+3/21/2023 - Owen Semersky: Small bug fix in findSurroundingMines
  */
 
 public class MineField extends Model {
@@ -203,27 +204,27 @@ public class MineField extends Model {
             }
 
             // Check Northeast
-            if ((y + 1 <= width) && (x - 1 >= 0) && (patches[x - 1][y + 1].mine)) {
+            if ((y + 1 < width) && (x - 1 >= 0) && (patches[x - 1][y + 1].mine)) {
                 mineCount++;
             }
 
             // Check East
-            if ((y + 1 <= width) && (patches[x][y + 1].mine)) {
+            if ((y + 1 < width) && (patches[x][y + 1].mine)) {
                 mineCount++;
             }
 
             // Check Southeast
-            if ((x + 1 <= height) && (y + 1 <= width) && (patches[x + 1][y + 1].mine)) {
+            if ((x + 1 < height) && (y + 1 < width) && (patches[x + 1][y + 1].mine)) {
                 mineCount++;
             }
 
             // Check South
-            if ((x + 1 <= height) && (patches[x + 1][y].mine)) {
+            if ((x + 1 < height) && (patches[x + 1][y].mine)) {
                 mineCount++;
             }
 
             // Check Southwest
-            if ((y - 1 >= 0) && (x + 1 <= height) && (patches[x + 1][y - 1].mine)) {
+            if ((y - 1 >= 0) && (x + 1 < height) && (patches[x + 1][y - 1].mine)) {
                 mineCount++;
             }
 
