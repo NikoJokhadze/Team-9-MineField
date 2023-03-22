@@ -25,9 +25,9 @@ SafeFrame and Utilities: Given classes that contain useful utility methods.
 
 MineField:
 
-MineField: The model for our MineField. Contains the patch class, which is our implementation of the individual "squares". Handles the movement of the player, changing the x and y coordinates depending on the selected heading. Also handles the randomizing of the mines.
+MineField: The model for our MineField. Contains the patch class, which is our implementation of the individual "squares". Handles the movement of the player, changing the x and y coordinates depending on the selected heading. Also handles the randomizing of the mines, including a difficulty selector to provide different percentages of mine randomizing.
 
-Heading: Contains the available headings or directions that the user can move inside of the MineField. Includes all eight compass directions.
+Heading: Contains the available headings or directions that the user can move inside of the MineField. Includes all eight compass directions and a reset.
 
 MineFieldFactory: Makes a new MineField model or MineFieldView. Also contains Mine Field title, as well as the help and about menus.
 
@@ -35,8 +35,11 @@ MineFieldMoveCommand: The only command available for the MineField is moving one
 
 MineFieldPanel: The JPanel for the MineField. Contains the controls as buttons and the MineField itself. Contains the main method used to run the program.
 
-MineFieldShape: This class is meant to be the shape for the MineField, however, this is already handled in MineFieldView. Therefore, the team did not use this class.
-
 MineFieldView: Contains the 2D array that serves as the MineField. The 2D array contains patches, which are the tiles that can either be safe or mined.
 
 Patch: A patch is a single tile or cell in the MineField. A patch has a boolean that determines whether it is a mine, which is chosen with RNG. The patch also contains a value that represents the number of mines that are one movement away from it (In a 3x3 square). It also has booleans that determine whether it is occupied or if it is the goal.
+
+
+Stoplight:
+
+The Stoplight file is an example implementation of the MVC framework provided by the professor, which acted as our tester for making sure our MVC was functional.
