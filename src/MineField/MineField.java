@@ -3,6 +3,7 @@ package MineField;
 import mvc.*;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
@@ -23,7 +24,7 @@ import javax.swing.*;
 3/21/2023 - Owen Semersky: Small bug fix in findSurroundingMines
  */
 
-public class MineField extends Model {
+public class MineField extends Model implements Serializable {
     public int minePercent;
     private int height = 20; // 20 rows
     private int width = 20; // 20 columns
@@ -182,7 +183,7 @@ public class MineField extends Model {
         location = new Point(x, y);
     }
 
-    public class Patch {
+    public class Patch implements Serializable{
         public boolean mine = false;//initial patch is not a mine, will be set randomly in Minefield class
         public int surroundingMines;
         public boolean occupied = false; // this becomes true for one patch at a time, being the one that the player is on
